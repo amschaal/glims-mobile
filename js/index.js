@@ -34,6 +34,8 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+	
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -47,5 +49,19 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+function scan(){
+	cordova.plugins.barcodeScanner.scan(
+	      function (result) {
+		  alert("We got a barcode\n" +
+		        "Result: " + result.text + "\n" +
+		        "Format: " + result.format + "\n" +
+		        "Cancelled: " + result.cancelled);
+	      }, 
+	      function (error) {
+		  alert("Scanning failed: " + error);
+	      }
+	   );
+}
 
 app.initialize();
